@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.mika.arch"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def testDef = rootProject.ext.testDependencies
+    testImplementation testDef.junitDependency
+    androidTestImplementation testDef.testRunnerDependency
+    androidTestImplementation testDef.testEspressoDependency
+
+
+    def supportDef = rootProject.ext.supportDependencies
+    implementation supportDef.appcompatDependency
+    implementation supportDef.designDependency
+
+
+    def archDef = rootProject.ext.archDependencies
+    implementation archDef.navigationFragmentDependency
+    implementation archDef.navigationUiDependency
+
+
+    api project(path: ':libnet')
+
+}

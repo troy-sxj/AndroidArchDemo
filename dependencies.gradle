@@ -1,0 +1,32 @@
+ext {
+
+    junitVersion = "4.12"
+    runnerVersion = "1.0.2"
+    espressoVersion = "3.0.2"
+    testDependencies = [
+            junitDependency       : "junit:junit:${junitVersion}",
+            testRunnerDependency  : "com.android.support.test:runner:${runnerVersion}",
+            testEspressoDependency: "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+
+    ]
+
+    supportVersion = "28.0.0"
+    supportDependencies = [
+            appcompatDependency: "com.android.support:appcompat-v7:${supportVersion}",
+            //提供MaterialDesign控件
+            designDependency   : "com.android.support:design:${supportVersion}"
+    ]
+
+    navigationVersion = "1.0.0-alpha06"
+    archDependencies = [
+            navigationFragmentDependency: "android.arch.navigation:navigation-fragment:${navigationVersion}",
+            navigationUiDependency      : "android.arch.navigation:navigation-ui:${navigationVersion}"
+    ]
+
+
+    retrofitVersion = "2.4.0"
+    commonDependencies = [
+            retrofitDependency    : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGsonDependency: "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    ]
+}
