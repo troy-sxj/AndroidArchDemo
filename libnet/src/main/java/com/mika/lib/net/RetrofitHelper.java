@@ -4,7 +4,10 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
+import com.mika.lib.net.data.cache.AccountCache;
+import com.mika.lib.net.data.cache.AccountCacheImpl;
 import com.mika.lib.net.interceptor.CacheInterceptor;
+import com.mika.lib.net.utils.HttpsUtils;
 import com.mika.lib.util.android.ArchLog;
 import com.mika.lib.util.android.FileUtils;
 
@@ -16,9 +19,6 @@ import java.util.Set;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
 
 import okhttp3.Cache;
 import okhttp3.Dispatcher;
@@ -40,10 +40,10 @@ public class RetrofitHelper {
     private CookieManager cookieManager;
     private Context applicationContext;
 
-    private RetrofitHelper(Context context) {
+    private RetrofitHelper(Context context, AccountCache accountCache) {
         interceptorSet = new HashSet<>();
         apiMap = new HashMap<>();
-        cookieManager = new CookieManager();
+        cookieManager = new CookieManager(accountCache);
         applicationContext = context;
     }
 
@@ -51,7 +51,7 @@ public class RetrofitHelper {
         if (mInstance == null) {
             synchronized (RetrofitHelper.class) {
                 if (mInstance == null) {
-                    mInstance = new RetrofitHelper(null);
+                    mInstance = new RetrofitHelper(null, new AccountCacheImpl());
                 }
             }
         }
@@ -77,12 +77,13 @@ public class RetrofitHelper {
             synchronized (this) {
                 OkHttpClient.Builder builder = new OkHttpClient.Builder();
                 //ssl
-                builder.hostnameVerifier(new HostnameVerifier() {
-                    @Override
-                    public boolean verify(String hostname, SSLSession session) {
-                        return true;
-                    }
-                });
+                if (BuildConfig.DEBUG) {
+                    //测试环境信任所有证书
+                    builder.hostnameVerifier(new HttpsUtils.TrustHostnameVerifier());
+                    builder.sslSocketFactory(HttpsUtils.createSSlSocketFactory(), new HttpsUtils.AllTrustManager());
+                } else {
+                    //
+                }
                 //拦截器
                 boolean hasCacheInterceptor = false;
                 for (Interceptor interceptor : interceptorSet) {
@@ -98,7 +99,7 @@ public class RetrofitHelper {
                 }
                 builder.dispatcher(getDispatcher());
                 //添加cookie处理
-//                builder.cookieJar(cookieManager);
+                builder.cookieJar(cookieManager);
                 //设置超时时间
                 builder.connectTimeout(30L, TimeUnit.SECONDS);
                 builder.readTimeout(30L, TimeUnit.SECONDS);
