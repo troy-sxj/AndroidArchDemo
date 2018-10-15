@@ -82,7 +82,7 @@ public class RetrofitHelper {
                     builder.hostnameVerifier(new HttpsUtils.TrustHostnameVerifier());
                     builder.sslSocketFactory(HttpsUtils.createSSlSocketFactory(), new HttpsUtils.AllTrustManager());
                 } else {
-                    //
+                    //TODO 正式环境如何处理？？
                 }
                 //拦截器
                 boolean hasCacheInterceptor = false;

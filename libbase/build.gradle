@@ -1,21 +1,25 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+
     defaultConfig {
-        applicationId "com.mika.arch"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -26,18 +30,9 @@ dependencies {
     androidTestImplementation testDef.testRunnerDependency
     androidTestImplementation testDef.testEspressoDependency
 
-
     def supportDef = rootProject.ext.supportDependencies
     implementation supportDef.appcompatDependency
-    implementation supportDef.designDependency
+    implementation supportDef.annotationDependency
 
-
-    def archDef = rootProject.ext.archDependencies
-    implementation archDef.navigationFragmentDependency
-    implementation archDef.navigationUiDependency
-
-
-    api project(path: ':libnet')
-    api project(path: ':libmvp')
-
+    implementation project(path: ":libutil")
 }

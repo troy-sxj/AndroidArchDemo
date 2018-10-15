@@ -36,6 +36,7 @@ dependencies {
     def commonDef = rootProject.commonDependencies
     api commonDef.retrofitDependency
     api commonDef.retrofitGsonDependency
+    api commonDef.retrofitRxJavaAdapterDependency
 
     api project(path: ":libutil")
 }

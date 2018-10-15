@@ -12,9 +12,10 @@ ext {
 
     supportVersion = "28.0.0"
     supportDependencies = [
-            appcompatDependency: "com.android.support:appcompat-v7:${supportVersion}",
+            appcompatDependency : "com.android.support:appcompat-v7:${supportVersion}",
             //提供MaterialDesign控件
-            designDependency   : "com.android.support:design:${supportVersion}"
+            designDependency    : "com.android.support:design:${supportVersion}",
+            annotationDependency: "com.android.support:support-annotations:${supportVersion}"
     ]
 
     navigationVersion = "1.0.0-alpha06"
@@ -26,7 +27,8 @@ ext {
 
     retrofitVersion = "2.4.0"
     commonDependencies = [
-            retrofitDependency    : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitGsonDependency: "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+            retrofitDependency             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGsonDependency         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitRxJavaAdapterDependency: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
     ]
 }
