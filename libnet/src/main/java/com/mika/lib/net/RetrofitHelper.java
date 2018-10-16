@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.internal.Util;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
@@ -66,7 +67,7 @@ public class RetrofitHelper {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(apiUrl)
                 .addConverterFactory(getJsonFactory())
-                //.addCallAdapterFactory()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(getHttpClient())
                 .build();
         return retrofit.create(clazz);

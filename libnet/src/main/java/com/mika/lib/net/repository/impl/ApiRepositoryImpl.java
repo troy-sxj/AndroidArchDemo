@@ -4,12 +4,13 @@ import com.mika.lib.net.RestApi;
 import com.mika.lib.net.repository.ApiRepository;
 import com.mika.lib.net.service.ApiService;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
+
 
 public class ApiRepositoryImpl extends DataRepositoryImpl implements ApiRepository {
 
     @Override
-    public Call<String> getToday() {
+    public Observable<String> getToday() {
         return createService(ApiService.class).getToday();
     }
 

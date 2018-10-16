@@ -1,12 +1,10 @@
 package com.mika.arch.main;
 
+import com.mika.arch.main.usecase.GetDayUseCase;
 import com.mika.lib.mvp.base.MvpPresenter;
 import com.mika.lib.net.repository.impl.ApiRepositoryImpl;
-import com.mika.lib.util.android.ArchLog;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * @Author: mika
@@ -17,25 +15,19 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     private Call<String> today;
 
+    private GetDayUseCase getDayUseCase;
+
     public MainPresenter(MainView view) {
         super(view);
+        getDayUseCase = new GetDayUseCase(new ApiRepositoryImpl());
     }
 
     public void request() {
-        ApiRepositoryImpl apiTodayRepository = new ApiRepositoryImpl();
-        today = apiTodayRepository.getToday();
-        today.enqueue(new Callback<String>() {
+        getDayUseCase.execute(new GetDayUseCase.GetDayCallback() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onGetDayInfo(String content) {
                 if (isViewAttach()) {
-                    getView().onGetContent(response.body().getBytes().toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                if(isViewAttach()){
-                    getView().onGetContent(t.getMessage());
+                    getView().onGetContent(content);
                 }
             }
         });
@@ -43,7 +35,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
     @Override
     protected void release() {
-        if(today != null){
+        if (today != null) {
             today.cancel();
             today = null;
         }

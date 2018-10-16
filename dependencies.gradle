@@ -26,9 +26,13 @@ ext {
 
 
     retrofitVersion = "2.4.0"
+    rxJavaVersion = "2.2.2"
+    rxAndroidVersion = "2.1.0"
     commonDependencies = [
             retrofitDependency             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGsonDependency         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxJavaAdapterDependency: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+            retrofitRxJavaAdapterDependency: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            rxJavaDependency               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroidDependency            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
     ]
 }

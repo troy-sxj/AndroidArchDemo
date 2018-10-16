@@ -1,9 +1,7 @@
 package com.mika.lib.net.repository.impl;
 
+import com.mika.lib.clean.DataRepository;
 import com.mika.lib.net.RetrofitHelper;
-import com.mika.lib.net.repository.DataRepository;
-
-import okhttp3.Interceptor;
 
 public abstract class DataRepositoryImpl implements DataRepository {
 

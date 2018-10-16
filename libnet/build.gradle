@@ -38,5 +38,6 @@ dependencies {
     api commonDef.retrofitGsonDependency
     api commonDef.retrofitRxJavaAdapterDependency
 
-    api project(path: ":libutil")
+    api project(path: ':libutil')
+    api project(path: ':libclean')
 }
