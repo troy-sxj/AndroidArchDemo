@@ -33,6 +33,15 @@ ext {
             retrofitGsonDependency         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             retrofitRxJavaAdapterDependency: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             rxJavaDependency               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroidDependency            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+            rxAndroidDependency            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+    ]
+
+    daggerVersion = "2.16"
+    daggerDependencies = [
+            daggerDependency               : "com.google.dagger:dagger:${daggerVersion}",
+            daggerAndroidDependency        : "com.google.dagger:dagger-android:${daggerVersion}",
+            daggerAndroidSupportDependency : "com.google.dagger:dagger-android-support:${daggerVersion}",
+            daggerCompilerDependency       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            daggerAndroidCompilerDependency: "com.google.dagger:dagger-android-processor:${daggerVersion}"
     ]
 }

@@ -34,5 +34,12 @@ dependencies {
     implementation supportDef.appcompatDependency
     implementation supportDef.annotationDependency
 
+    def daggerDef = rootProject.ext.daggerDependencies
+    api daggerDef.daggerDependency
+    api daggerDef.daggerAndroidDependency
+    api daggerDef.daggerAndroidSupportDependency
+    annotationProcessor daggerDef.daggerCompilerDependency
+    annotationProcessor daggerDef.daggerAndroidCompilerDependency
+
     implementation project(path: ":libutil")
 }

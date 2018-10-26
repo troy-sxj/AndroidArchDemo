@@ -36,7 +36,6 @@ dependencies {
     implementation archDef.navigationFragmentDependency
     implementation archDef.navigationUiDependency
 
-
     api project(path: ':libnet')
     api project(path: ':libmvp')
 //    api project(path: ':libclean')
