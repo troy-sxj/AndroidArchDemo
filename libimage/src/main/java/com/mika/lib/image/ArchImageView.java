@@ -2,7 +2,6 @@ package com.mika.lib.image;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.ColorDrawable;
 import android.util.AttributeSet;
 
 import com.facebook.drawee.drawable.ScalingUtils;
@@ -43,6 +42,10 @@ public class ArchImageView extends SimpleDraweeView {
         super(context, hierarchy);
     }
 
+    /**
+     * 处理xml属性
+     * @param attrs
+     */
     private void initDrawerHierarchy(AttributeSet attrs) {
         if (attrs == null) return;
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ArchImageView);

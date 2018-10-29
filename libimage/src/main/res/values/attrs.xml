@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--隔离Fresco xml属性，如需额外的属性可以继续添加-->
     <declare-styleable name="ArchImageView">
         <attr name="scaleType">
             <enum name="none" value="-1" />
