@@ -81,6 +81,7 @@ public class ArchImageView extends SimpleDraweeView {
                 builder.setRoundingParams(rp);
             }
             setHierarchy(builder.build());
+            typedArray.recycle();
         }
     }
 
