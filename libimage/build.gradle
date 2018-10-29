@@ -38,5 +38,11 @@ dependencies {
     api commonDef.rxJavaDependency
     api commonDef.rxAndroidDependency
 
+    def frescoDef = rootProject.ext.frescoDependencies
+    api frescoDef.frescoDependency
+    api frescoDef.gifSupportDependency
+    api frescoDef.webPDependency
+    api frescoDef.webpSupportDenpendency
+
     implementation project(path: ":libutil")
 }

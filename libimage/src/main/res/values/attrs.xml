@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ArchImageView">
+        <attr name="scaleType" format="string" />
+        <attr name="placeHolder" format="reference|color" />
+        <attr name="errorHolder" format="reference|color" />
+        <attr name="roundAsCircle" format="boolean" />
+
+    </declare-styleable>
+</resources>

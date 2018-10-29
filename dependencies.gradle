@@ -46,4 +46,13 @@ ext {
             daggerCompilerDependency       : "com.google.dagger:dagger-compiler:${daggerVersion}",
             daggerAndroidCompilerDependency: "com.google.dagger:dagger-android-processor:${daggerVersion}"
     ]
+
+    frescoVersion = "1.2.0"
+    frescoDependencies = [
+            frescoDependency      : "com.facebook.fresco:fresco:${frescoVersion}",
+            gifSupportDependency  : "com.facebook.fresco:animated-gif:${frescoVersion}",
+            webPDependency        : "com.facebook.fresco:animated-webp:${frescoVersion}",
+            webpSupportDenpendency: "com.facebook.fresco:webpsupport:${frescoVersion}"
+
+    ]
 }
