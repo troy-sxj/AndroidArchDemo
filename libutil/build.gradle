@@ -24,4 +24,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    def testDef = rootProject.ext.testDependencies
+    testImplementation testDef.junitDependency
+    testImplementation testDef.mockitoDependency
+    androidTestImplementation testDef.testRunnerDependency
+    androidTestImplementation testDef.testEspressoDependency
 }

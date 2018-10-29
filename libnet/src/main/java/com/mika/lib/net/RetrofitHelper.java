@@ -117,7 +117,7 @@ public class RetrofitHelper {
 
     private Cache getCache() {
         if (netCache == null) {
-            File cacheFile = new File(FileUtils.getCacheDir(applicationContext), Key.Cache.HTTP_RESPONSE);
+            File cacheFile = new File(FileUtils.getCacheDir(), Key.Cache.HTTP_RESPONSE);
             boolean mkdirs = false;
             if (!cacheFile.exists() && cacheFile.isDirectory()) {
                 mkdirs = cacheFile.mkdirs();

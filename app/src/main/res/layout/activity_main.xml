@@ -7,6 +7,11 @@
     tools:context=".main.MainActivity">
 
     <Button
+        android:id="@+id/btn_load"
+        android:text="load Image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,5 +23,10 @@
         android:lineSpacingExtra="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

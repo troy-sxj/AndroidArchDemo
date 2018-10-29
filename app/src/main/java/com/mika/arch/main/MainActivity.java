@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mika.arch.R;
@@ -14,6 +15,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     private TextView tvContent;
     private Button btn;
+    private Button btnLoad;
+    private ImageView imageView;
 
     @Override
     protected MainPresenter createPresenter() {
@@ -24,6 +27,8 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
     protected void initView() {
         tvContent = findViewById(R.id.tv);
         btn = findViewById(R.id.btn);
+        btnLoad = findViewById(R.id.btn_load);
+        imageView = findViewById(R.id.image_view);
     }
 
     @Override
@@ -34,11 +39,15 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
                 mPresenter.request();
             }
         });
+        btnLoad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     @Override
     protected void initData(Bundle bundle) {
-
     }
 
     @Override
@@ -53,7 +62,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
 
     @Override
     public void onGetContent(String content) {
-        if(!TextUtils.isEmpty(content)){
+        if (!TextUtils.isEmpty(content)) {
             tvContent.setText(content);
         }
     }
