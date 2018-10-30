@@ -1,18 +1,18 @@
 package com.mika.lib.image;
 
-import android.graphics.Bitmap;
-
 /**
  * @Author: mika
  * @Time: 2018-10-29 15:35
  * @Description:
- *
  */
-public interface ILoader {
+public interface ILoader<T> {
 
-    void showImage(ArchImageView imageView, String url);
+    void showImage(String url, ArchImageView imageView);
 
-    void showImage(ArchImageView imageView, String url, ImageLoadConfig loadConfig);
+    void showImage(String url, ArchImageView imageView, ImageLoadConfig loadConfig);
 
-    Bitmap loadBitmapForNet(String url);
+    void loadImage(String url, T loadListener);
+
+    void loadImage(String url, ImageLoadConfig loadConfig, T loadListener);
+
 }

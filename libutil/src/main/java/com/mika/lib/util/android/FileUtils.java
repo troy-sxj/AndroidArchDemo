@@ -45,4 +45,22 @@ public class FileUtils {
         }
         return dir;
     }
+
+//    public static String getPath(Context context) {
+//        boolean hasSDCard = Environment.getExternalStorageState().equals("mounted");
+//        String packageName = context.getPackageName() + File.separator + "/appCache/";
+//        if (hasSDCard) {
+//            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + packageName;
+//            File file = new File(path);
+//            boolean var5 = file.exists();
+//            if (!var5) {
+//                file.mkdirs();
+//            }
+//
+//            return file.getPath();
+//        } else {
+//            return null;
+//        }
+//    }
+
 }

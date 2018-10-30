@@ -16,16 +16,16 @@ public class ImageLoader {
         mLoaderInstance = ImageFactory.createImageFactory(context);
     }
 
-    public static void showImage(ArchImageView imageView, String url) {
-        mLoaderInstance.showImage(imageView, url);
+    public static void showImage(String url ,ArchImageView imageView) {
+        mLoaderInstance.showImage(url, imageView);
     }
 
-    public static void showImage(ArchImageView imageView, String url, ImageLoadConfig loadConfig) {
-        mLoaderInstance.showImage(imageView, url, loadConfig);
+    public static void showImage( String url, ArchImageView imageView,ImageLoadConfig loadConfig) {
+        mLoaderInstance.showImage(url, imageView, loadConfig);
     }
 
-    public Bitmap loadBitmap(String url){
-        return mLoaderInstance.loadBitmapForNet(url);
+    public static void loadImage(String url, BitmapLoadListener loadListener){
+        mLoaderInstance.loadImage(url, loadListener);
     }
 
 }

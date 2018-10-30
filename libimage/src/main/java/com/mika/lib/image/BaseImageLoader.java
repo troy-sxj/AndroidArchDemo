@@ -7,7 +7,7 @@ import android.content.Context;
  * @Time: 2018-10-29 14:49
  * @Description:
  */
-public abstract class BaseImageLoader implements ILoader {
+public abstract class BaseImageLoader<T extends BitmapLoadListener> implements ILoader<T> {
 
     protected Context mContext;
 

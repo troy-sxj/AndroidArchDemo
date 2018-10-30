@@ -1,6 +1,7 @@
 package com.mika.arch.main;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.mika.arch.R;
 import com.mika.lib.image.ArchImageView;
+import com.mika.lib.image.BitmapLoadListener;
 import com.mika.lib.image.ImageLoader;
 import com.mika.lib.mvp.MvpActivity;
 
@@ -46,16 +48,23 @@ public class MainActivity extends MvpActivity<MainPresenter> implements MainView
         btnLoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageLoader.showImage(imageView1, "http://n.sinaimg.cn/edu/transform/20160301/LAWp-fxpwmrp0377606.jpg");
-                ImageLoader.showImage(imageView2, "http://n.sinaimg.cn/edu/transform/20160301/LAWp-fxpwmrp0377606.jpg");
-                ImageLoader.showImage(imageView3, "http://img.youai123.com/1507667222-3317.gif");
-                ImageLoader.showImage(imageView4, "http://img.youai123.com/1507667222-3317.gif");
+                ImageLoader.showImage("http://n.sinaimg.cn/edu/transform/20160301/LAWp-fxpwmrp0377606.jpg", imageView1);
+                ImageLoader.showImage("http://n.sinaimg.cn/edu/transform/20160301/LAWp-fxpwmrp0377606.jpg", imageView2);
+                ImageLoader.showImage("http://img.youai123.com/1507667222-3317.gif", imageView3);
+                ImageLoader.showImage("http://img.youai123.com/1507667222-3317.gif", imageView4);
             }
         });
+
     }
 
     @Override
     protected void initData(Bundle bundle) {
+        ImageLoader.loadImage("http://n.sinaimg.cn/edu/transform/20160301/LAWp-fxpwmrp0377606.jpg", new BitmapLoadListener() {
+            @Override
+            public void onLoadBitmap(Bitmap bitmap) {
+
+            }
+        });
     }
 
     @Override

@@ -11,6 +11,7 @@ public class ImageLoadConfig {
     private int height;
 
     private boolean retry;
+    private int downloadCacheType = -1;
 
     public ImageLoadConfig(Build build){
         this.width = build.width;
@@ -30,11 +31,17 @@ public class ImageLoadConfig {
         return retry;
     }
 
+    public int getDownloadCacheType() {
+        return downloadCacheType;
+    }
+
     public static class Build{
 
         private int width;      //图片宽度
         private int height;     //图片高度
         private boolean retry;  //加载失败，是否重试
+
+        private int downloadCacheType = -1;    //bitmap下载后是否需要缓存
 
         public Build setSize(int width, int height){
             this.width = width;
@@ -47,8 +54,10 @@ public class ImageLoadConfig {
             return this;
         }
 
-
-
+        public Build setDownloadCacheType(int downloadCacheType) {
+            this.downloadCacheType = downloadCacheType;
+            return this;
+        }
 
         public ImageLoadConfig builder(){
             return new ImageLoadConfig(this);

@@ -1,21 +1,26 @@
 package com.mika.lib.image.fresco;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.facebook.cache.disk.DiskCacheConfig;
+import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.memory.MemoryTrimType;
 import com.facebook.common.memory.MemoryTrimmable;
 import com.facebook.common.memory.MemoryTrimmableRegistry;
+import com.facebook.common.references.CloseableReference;
 import com.facebook.common.util.ByteConstants;
+import com.facebook.datasource.DataSource;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.core.ImagePipeline;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.mika.lib.image.ArchImageView;
 import com.mika.lib.image.BaseImageLoader;
@@ -29,7 +34,7 @@ import java.util.List;
  * @Time: 2018-10-29 14:51
  * @Description:
  */
-public class FrescoManager extends BaseImageLoader {
+public class FrescoManager extends BaseImageLoader<FrescoBitmapLoadListener> {
 
     private static final int MAX_DISK_CACHE_SIZE = 40 * ByteConstants.MB;
     private static final int MAX_MEMORY_CACHE_SIZE = (int) (Runtime.getRuntime().maxMemory() / 8);
@@ -55,12 +60,12 @@ public class FrescoManager extends BaseImageLoader {
     }
 
     @Override
-    public void showImage(ArchImageView imageView, String url) {
-        this.showImage(imageView, url, null);
+    public void showImage(String url, ArchImageView imageView) {
+        this.showImage(url, imageView, null);
     }
 
     @Override
-    public void showImage(ArchImageView imageView, String url, ImageLoadConfig loadConfig) {
+    public void showImage(String url, ArchImageView imageView, ImageLoadConfig loadConfig) {
         try {
             ResizeOptions resizeOptions = null;
             boolean retry = false;
@@ -92,8 +97,35 @@ public class FrescoManager extends BaseImageLoader {
     }
 
     @Override
-    public Bitmap loadBitmapForNet(String url) {
-        return null;
+    public void loadImage(String url, ImageLoadConfig loadConfig, FrescoBitmapLoadListener loadListener) {
+        if (TextUtils.isEmpty(url) || loadListener == null) return;
+        try {
+            loadListener.config(url, loadConfig);
+
+            Uri uri = Uri.parse(url);
+            ImageRequestBuilder builder = ImageRequestBuilder.newBuilderWithSource(uri);
+            if (loadConfig != null) {
+                builder.setResizeOptions(new ResizeOptions(loadConfig.getWidth(), loadConfig.getHeight()));
+            }
+            ImageRequest imageRequest = builder
+                    .setLocalThumbnailPreviewsEnabled(true)
+                    .setLowestPermittedRequestLevel(ImageRequest.RequestLevel.FULL_FETCH)
+                    .setProgressiveRenderingEnabled(false)
+                    .build();
+
+            ImagePipeline imagePipeline = Fresco.getImagePipeline();
+            DataSource<CloseableReference<CloseableImage>>
+                    dataSource = imagePipeline.fetchDecodedImage(imageRequest, null);
+
+            dataSource.subscribe(loadListener, CallerThreadExecutor.getInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void loadImage(String url, FrescoBitmapLoadListener loadListener) {
+        loadImage(url, null, loadListener);
     }
 
     @Override
